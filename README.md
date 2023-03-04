@@ -3,6 +3,10 @@
 This is a small script to retrieve information about the temperature and pH value of various organisms with the same EC number for an enzyme, based on the [Brenda database][1].
 
 ## Usage
+For download the script:
+```
+git clone https://github.com/Truongphi20/ec2phtem
+```
 First, you must have a Brenda account, otherwise, you must register an account on Brenda's website. For running the script, you have just command:
 
 ```
