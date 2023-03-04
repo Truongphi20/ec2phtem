@@ -12,6 +12,8 @@ And fill in your email, the password of Brenda's account, and finally is EC numb
 
 ## Meaning of the columns
 
+The reputation column is the number of citations of related articles. The meaning of other columns can be looked up on the guideline [SOAP website][2] of Brenda.
 
 
 [1]: https://www.brenda-enzymes.org/
+[2]: https://www.brenda-enzymes.org/soap.php
