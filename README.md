@@ -14,6 +14,10 @@ python .\ec2phtem.py
 ```
 And fill in your email, the password of Brenda's account, and finally is EC number of the desired enzyme 
 
+Example result:
+
+![image](https://user-images.githubusercontent.com/96680644/222891908-425be4a9-d3ae-4361-b59a-27fe3db7b412.png)
+
 ## Meaning of the columns
 
 The reputation column is the number of citations of related articles. The meaning of other columns can be looked up on the guideline [SOAP website][2] of Brenda.
