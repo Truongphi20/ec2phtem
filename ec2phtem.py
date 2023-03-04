@@ -21,6 +21,7 @@ email = emaila.replace("@", "\@")
 client = Client(wsdl)
 
 ec_num = input("EC number: ")
+print("\n")
 
 
 def PubIDfromLitID(ec_num, ec_lit):
@@ -232,9 +233,12 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
 	tem_range = thread5.result()
 	tem_sta = thread6.result()
 
+print("\nCalculating Reputation Score...")
 
 ph_data = ProcessInfor(ph_range,ph_opt,ph_sta)
 tem_data = ProcessInfor(tem_range,tem_opt,tem_sta)
 
+
+print("\n\nCompleting...","\n")
 total_data = CompleteData(ph_data, tem_data)
 total_data.to_csv(f"{ec_num}_data.csv")
