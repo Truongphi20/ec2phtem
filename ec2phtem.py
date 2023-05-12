@@ -38,21 +38,23 @@ def PubIDfromLitID(ec_num, ec_lit):
         return float("nan")
 
 def MakeDDF(data, ec_num): #Create dataframe from extract list of dictionary
-    headers = list(data[0])
-    #print(headers)
+	if len(data) != 0:
+		headers = list(data[0])
+	    #print(headers)
 
-    total_list = []
-    for header in headers:
-        tem = []
-        for dic in data:
-            tem.append(dic[header])                      
-        total_list.append(tem)
-
-    tata = pd.DataFrame(list(zip(*total_list)), columns=headers)
-    tata = tata.drop("ecNumber", axis=1)
-    tata["literature"] = tata["literature"].apply(lambda x: PubIDfromLitID(ec_num, x))
-    #print(tata)
-    return tata
+		total_list = []
+		for header in headers:
+			tem = []
+			for dic in data:
+		   		tem.append(dic[header])                      
+			total_list.append(tem)
+		tata = pd.DataFrame(list(zip(*total_list)), columns=headers)
+		tata = tata.drop("ecNumber", axis=1)
+		tata["literature"] = tata["literature"].apply(lambda x: PubIDfromLitID(ec_num, x))
+		#print(tata)
+		return tata
+	else:
+		raise Exception("Empty data.")
 
 def RepuScore_html(pub_id): # Get reputation score from html
     

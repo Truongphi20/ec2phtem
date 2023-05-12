@@ -2,6 +2,7 @@ from zeep import Client
 from zeep.transports import Transport
 import zeep
 import hashlib
+import streamlit as st
 
 # emaila = "phi.nguyenphinguyen@hcmut.edu.vn"
 # passa = 'anh2cuchit'
@@ -26,7 +27,7 @@ def checkLogin(input_array):
 			# print("a")
 			continue
 		break
-
+	st.checkbox('Checked log in.', value=True, disabled=True)
 	return result
 
 # print(checkLogin(emaila,passa))
