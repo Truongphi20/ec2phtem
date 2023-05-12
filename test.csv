@@ -1,0 +1,29 @@
+organism,phRange,phRangeMaximum,phStabilityMaximum,phStability,phOptimum,phOptimumMaximum,reputation_ph,temperatureRangeMaximum,temperatureRange,temperatureStabilityMaximum,temperatureStability,temperatureOptimumMaximum,temperatureOptimum,reputation_tem,sum_reputation
+Thermotoga maritima,4.35,8.75,7.5,5.2,6.7,7.5,50.0,92.5,47.5,80.0,75.875,83.33333333333333,75.83333333333333,83.0,133.0
+Thermus aquaticus,,,9.5,4.5,6.5,6.0,93.0,,,80.0,78.0,,73.0,31.0,124.0
+Thermococcus litoralis,,,10.0,5.5,6.5,,0.0,102.5,60.0,,90.0,,87.0,119.0,119.0
+Thermus thermophilus,4.0,7.5,7.5,4.0,5.85,,30.0,90.0,50.0,,80.0,,69.0,15.0,45.0
+Pisum sativum,,,,,6.35,8.0,38.0,,,,,,,,38.0
+Daucus carota,,,,,5.5,,35.0,,,,,,,,35.0
+Solanum lycopersicum,,,,,5.5,,35.0,,,,,,,,35.0
+Corynebacterium glutamicum,5.5,9.0,9.0,5.5,6.0,,3.0,,,42.5,40.0,,37.5,29.0,32.0
+Thermus scotoductus,,,,,7.5,,24.0,,,,,,75.0,7.0,31.0
+Arabidopsis thaliana,,,,4.0,6.333333333333333,8.0,16.0,,,,60.0,,33.5,13.0,29.0
+Bacillus sp. (in: Bacteria),4.0,6.0,8.0,3.0,5.0,,18.0,,,,4.0,,,6.0,24.0
+Pyrobaculum aerophilum,,,,,6.7,,0.0,,,,90.33333333333333,,95.0,22.0,22.0
+Aspergillus niger,4.2,8.0,,,5.5,,14.0,,,,,,37.0,0.0,14.0
+Aquifex aeolicus,,,11.0,3.0,6.5,,0.0,100.0,60.0,,90.0,,90.0,13.0,13.0
+Escherichia coli,4.0,9.0,,,6.633333333333333,,0.0,55.0,30.0,,45.0,,32.5,13.0,13.0
+Pseudomonas stutzeri,,,,,7.6,7.7,3.0,,,42.0,43.5,,33.5,3.0,6.0
+Borreliella burgdorferi,,,,,5.5,,0.0,,,,,,37.0,0.0,0.0
+Culex quinquefasciatus,,,,,7.0,,0.0,,,,51.5,,37.0,0.0,0.0
+Manihot esculenta,,,,,6.0,8.0,0.0,,,,,,37.0,0.0,0.0
+Pyrococcus sp.,,,,,6.0,8.0,0.0,,,,100.0,,100.0,0.0,0.0
+Saccharolobus solfataricus,,,,,5.5,,0.0,,,,,75.0,65.0,0.0,0.0
+Solanum tuberosum,,,,,6.7,,0.0,,,,,,37.0,0.0,0.0
+Sus scrofa,,,,,6.0,,0.0,,,,,,37.0,0.0,0.0
+Synechocystis sp.,,,,,7.0,,0.0,,,,,,45.0,0.0,0.0
+Thermotoga neapolitana,,,,,7.0,,0.0,,,,,,85.0,0.0,0.0
+Thermus brockianus,,,,,6.0,,0.0,,,,,,70.0,0.0,0.0
+Thermus filiformis,,,,,6.0,,0.0,,,70.0,60.0,,60.0,0.0,0.0
+Chlamydomonas reinhardtii,,,,,,,,,,,,,55.0,0.0,0.0

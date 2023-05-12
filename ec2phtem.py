@@ -2,8 +2,8 @@ import pandas as pd
 import concurrent.futures
 import re
 import requests
-from zeep import Client
 import hashlib
+from zeep import Client
 import numpy as np
 from Bio import Entrez
 import statistics
@@ -12,16 +12,16 @@ from tqdm import tqdm
 
 tqdm.pandas()
 
-emaila = input("Email address: ")
-passa = getpass()
+# emaila = input("Email address: ")
+# passa = getpass()
 
 wsdl = "https://www.brenda-enzymes.org/soap/brenda_zeep.wsdl"
-password = hashlib.sha256(passa.encode("utf-8")).hexdigest()
-email = emaila.replace("@", "\@")
+# password = hashlib.sha256(passa.encode("utf-8")).hexdigest()
+# email = emaila.replace("@", "\@")
 client = Client(wsdl)
 
-ec_num = input("EC number: ")
-print("\n")
+# ec_num = input("EC number: ")
+# print("\n")
 
 
 def PubIDfromLitID(ec_num, ec_lit):
@@ -37,7 +37,7 @@ def PubIDfromLitID(ec_num, ec_lit):
     else:
         return float("nan")
 
-def MakeDDF(data): #Create dataframe from extract list of dictionary
+def MakeDDF(data, ec_num): #Create dataframe from extract list of dictionary
     headers = list(data[0])
     #print(headers)
 
@@ -65,7 +65,8 @@ def RepuScore_html(pub_id): # Get reputation score from html
     else:
         return 0
 
-def GetPhStability():## Get pH stability
+def GetPhStability(email, password, ec_num):## Get pH stability
+	
 	phsta_parameters =  (email,password,f"ecNumber*{ec_num}",
 	                     "phStability*", "phStabilityMaximum*",
 	                     "commentary*", "organism*", "literature*")
@@ -78,11 +79,12 @@ def GetPhStability():## Get pH stability
 			continue
 		break
 
-	ph_sta = MakeDDF(result_phsta)
+	ph_sta = MakeDDF(result_phsta, ec_num)
 	print("Get pH stability done!")
 	return ph_sta
 
-def GetPhRange(): ## Get pH range
+def GetPhRange(email, password, ec_num): ## Get pH range
+	
 	phra_parameters =  (email,password,f"ecNumber*{ec_num}",
 	                     "phRange*", "phRangeMaximum*", 
 	                    "commentary*", "organism*", "literature*")
@@ -94,11 +96,12 @@ def GetPhRange(): ## Get pH range
 			continue
 		break
 
-	ph_range = MakeDDF(result_phra)
+	ph_range = MakeDDF(result_phra, ec_num)
 	print("Get pH range done!")
 	return ph_range
 
-def GetPhOptimal(): ## Get pH optimal
+def GetPhOptimal(email, password, ec_num): ## Get pH optimal
+	
 	phop_parameters =  (email,password,f"ecNumber*{ec_num}",
 	                     "phOptimum*", "phOptimumMaximum*", 
 	                    "commentary*", "organism*", "literature*")
@@ -111,11 +114,12 @@ def GetPhOptimal(): ## Get pH optimal
 			continue
 		break
 
-	ph_opt = MakeDDF(result_phop)
+	ph_opt = MakeDDF(result_phop, ec_num)
 	print("Get pH optimal done!")
 	return ph_opt
 
-def GetTemperatureOptimum(): ## Get Temperature Optimum
+def GetTemperatureOptimum(email, password, ec_num): ## Get Temperature Optimum
+	
 	temop_parameters =  (email,password,f"ecNumber*{ec_num}", 
 	                     "temperatureOptimum*", "temperatureOptimumMaximum*", 
 	                     "commentary*", "organism*", "literature*")
@@ -127,11 +131,12 @@ def GetTemperatureOptimum(): ## Get Temperature Optimum
 			continue
 		break
 
-	tem_opt = MakeDDF(result_temop)
+	tem_opt = MakeDDF(result_temop, ec_num)
 	print("Get Temperature Optimum done!")
 	return tem_opt
 
-def GetTemperatureRange(): ## Get Temperature Range
+def GetTemperatureRange(email, password, ec_num): ## Get Temperature Range
+	
 	temran_parameters =  (email,password,f"ecNumber*{ec_num}",
 	                      "temperatureRange*", "temperatureRangeMaximum*", 
 	                      "commentary*", "organism*", "literature*")
@@ -143,11 +148,12 @@ def GetTemperatureRange(): ## Get Temperature Range
 			continue
 		break
 
-	tem_range = MakeDDF(result_temran)
+	tem_range = MakeDDF(result_temran, ec_num)
 	print("Get Temperature Range done!")
 	return tem_range
 
-def GetTemperatureStability(): ## Get Temperature Stability
+def GetTemperatureStability(email, password, ec_num): ## Get Temperature Stability
+	
 	temsta_parameters =  (email,password,f"ecNumber*{ec_num}",
 	                      "temperatureStability*", "temperatureStabilityMaximum*", 
 	                      "commentary*", "organism*", "literature*")
@@ -159,7 +165,7 @@ def GetTemperatureStability(): ## Get Temperature Stability
 			continue
 		break
 
-	tem_sta = MakeDDF(result_temsta)
+	tem_sta = MakeDDF(result_temsta, ec_num)
 	print("Get Temperature Stability done!")
 	return tem_sta
 
@@ -214,31 +220,34 @@ def CompleteData(ph_data, tem_data):
 	total_data.sort_values(by=['sum_reputation',"reputation_ph", "reputation_tem"], inplace=True, ascending=False)
 	return(total_data)
 
-
-with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
-	thread1 = executor.submit(GetPhStability)
-	thread2 = executor.submit(GetPhRange)
-	thread3 = executor.submit(GetPhOptimal)
-
-
-	thread4 = executor.submit(GetTemperatureOptimum)
-	thread5 = executor.submit(GetTemperatureRange)
-	thread6 = executor.submit(GetTemperatureStability)
-
-	ph_sta = thread1.result()
-	ph_range = thread2.result()
-	ph_opt = thread3.result()
-
-	tem_opt = thread4.result()
-	tem_range = thread5.result()
-	tem_sta = thread6.result()
-
-print("\nCalculating Reputation Score...")
-
-ph_data = ProcessInfor(ph_range,ph_opt,ph_sta)
-tem_data = ProcessInfor(tem_range,tem_opt,tem_sta)
+def ecRun(email, password, ec_num):
+	with concurrent.futures.ThreadPoolExecutor(max_workers=6) as executor:
+		thread1 = executor.submit(GetPhStability,email, password, ec_num)
+		thread2 = executor.submit(GetPhRange,email, password, ec_num)
+		thread3 = executor.submit(GetPhOptimal,email, password, ec_num)
 
 
-print("\n\nCompleting...","\n")
-total_data = CompleteData(ph_data, tem_data)
-total_data.to_csv(f"{ec_num}_data.csv")
+		thread4 = executor.submit(GetTemperatureOptimum,email, password, ec_num)
+		thread5 = executor.submit(GetTemperatureRange,email, password, ec_num)
+		thread6 = executor.submit(GetTemperatureStability,email, password, ec_num)
+
+		ph_sta = thread1.result()
+		ph_range = thread2.result()
+		ph_opt = thread3.result()
+
+		tem_opt = thread4.result()
+		tem_range = thread5.result()
+		tem_sta = thread6.result()
+
+	print("\nCalculating Reputation Score...")
+
+	ph_data = ProcessInfor(ph_range,ph_opt,ph_sta)
+	tem_data = ProcessInfor(tem_range,tem_opt,tem_sta)
+
+
+	print("\n\nCompleting...","\n")
+	total_data = CompleteData(ph_data, tem_data)
+	# total_data.to_csv(f"{ec_num}_data.csv")
+	return total_data
+
+# print(ecRun(email, password, ec_num))
