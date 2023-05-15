@@ -1,6 +1,6 @@
 # Find temperture and pH of related organism by EC number
 
-This is a small script to retrieve information about the temperature and pH value of various organisms with the same EC number for an enzyme, based on the [Brenda database][1].
+This is a small script to retrieve information about the temperature and pH value of various organisms with the same EC number for an enzyme, based on the [Brenda database][1]. This is the [web app][3] version 
 
 ## Usage
 For download the script:
@@ -25,3 +25,4 @@ The reputation column is the number of citations of related articles. The meanin
 
 [1]: https://www.brenda-enzymes.org/
 [2]: https://www.brenda-enzymes.org/soap.php
+[3]: https://truongphi20-ec2phtem-main-streamlit-0vs5qq.streamlit.app/
